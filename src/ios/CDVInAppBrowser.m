@@ -479,9 +479,26 @@
         }
     }
     NSString *myUrlString = url.absoluteString;
+    
+    NSString *extension = [myUrlString pathExtension];
     // TODO : add office extensions!
     //.pdf
-    if ( [myUrlString hasSuffix:@".pdf"] )
+    
+    BOOL needsToBeOpenedInSafari =
+    (
+     ([extension caseInsensitiveCompare:@"pdf"] == NSOrderedSame) ||
+     ([extension caseInsensitiveCompare:@"ics"] == NSOrderedSame) ||
+     ([extension caseInsensitiveCompare:@"vcf"] == NSOrderedSame) ||
+     ([extension caseInsensitiveCompare:@"xls"] == NSOrderedSame) ||
+     ([extension caseInsensitiveCompare:@"xlsx"] == NSOrderedSame) ||
+     ([extension caseInsensitiveCompare:@"doc"] == NSOrderedSame) ||
+     ([extension caseInsensitiveCompare:@"docx"] == NSOrderedSame) ||
+     ([extension caseInsensitiveCompare:@"pptx"] == NSOrderedSame) ||
+     ([extension caseInsensitiveCompare:@"ppt"] == NSOrderedSame) ||
+     ([extension caseInsensitiveCompare:@"ics"] == NSOrderedSame)
+     );
+    
+    if (needsToBeOpenedInSafari)
     {
         
         [[UIApplication sharedApplication] openURL: request.URL];
