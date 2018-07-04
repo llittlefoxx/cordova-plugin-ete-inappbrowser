@@ -123,6 +123,8 @@
     if (browserOptions.clearcache) {
         NSHTTPCookie *cookie;
         NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        // added to delete the cached links
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
         for (cookie in [storage cookies])
         {
             if (![cookie.domain isEqual: @".^filecookies^"]) {
