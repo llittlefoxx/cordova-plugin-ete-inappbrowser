@@ -805,6 +805,8 @@ public class InAppBrowser extends CordovaPlugin {
 
                 if (clearAllCache) {
                     CookieManager.getInstance().removeAllCookie();
+                    // clearing cache
+                    webView.clearCache();
                 } else if (clearSessionCache) {
                     CookieManager.getInstance().removeSessionCookie();
                 }
