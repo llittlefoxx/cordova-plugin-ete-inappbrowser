@@ -35,6 +35,11 @@
 
 #pragma mark CDVInAppBrowser
 
+@interface NSURLRequest (DummyInterface)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host;
++ (void)setAllowsAnyHTTPSCertificate:(BOOL)allow forHost:(NSString*)host;
+@end
+
 @interface CDVInAppBrowser () {
     NSInteger _previousStatusBarStyle;
 }
@@ -899,7 +904,7 @@
 - (void)navigateTo:(NSURL*)url
 {
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    
+    // [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
     if (_userAgentLockToken != 0) {
         [self.webView loadRequest:request];
     } else {
