@@ -484,6 +484,14 @@
             [self.commandDelegate sendPluginResult:pluginResult callbackId:scriptCallbackId];
             return NO;
         }
+    }else if(![url.scheme  isEqualToString: @"https"] && ![url.scheme  isEqualToString: @"http"]){
+        UIApplication *app = [UIApplication sharedApplication];
+        if([app canOpenURL:url]){
+            [app openURL:url];
+            return NO;
+        }else {
+            NSLog(@"the following url scheme ( %@ ) cannot be opened ", url.scheme);
+        }
     }
     NSString *myUrlString = url.absoluteString;
     
@@ -501,8 +509,7 @@
      ([extension caseInsensitiveCompare:@"doc"] == NSOrderedSame) ||
      ([extension caseInsensitiveCompare:@"docx"] == NSOrderedSame) ||
      ([extension caseInsensitiveCompare:@"pptx"] == NSOrderedSame) ||
-     ([extension caseInsensitiveCompare:@"ppt"] == NSOrderedSame) ||
-     ([extension caseInsensitiveCompare:@"ics"] == NSOrderedSame)
+     ([extension caseInsensitiveCompare:@"ppt"] == NSOrderedSame)
      );
     
     if (needsToBeOpenedInSafari)
